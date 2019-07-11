@@ -11,8 +11,6 @@ function PostForm() {
     body: ""
   });
 
-  //TODO useMutation hook video #6 @ 7:40
-
   const [createPost, { error }] = useMutation(CREATE_POST, {
     variables: values,
     update(proxy, result) {
@@ -30,20 +28,28 @@ function PostForm() {
   }
 
   return (
-    <Form onSubmit={onSubmit}>
-      <h2>Create a post:</h2>
-      <Form.Field>
-        <Form.Input
-          placeholder="Hi World!"
-          name="body"
-          onChange={onChange}
-          value={values.body}
-        />
-      </Form.Field>
-      <Button type="submit" color="teal">
-        Submit
-      </Button>
-    </Form>
+    <>
+      <Form onSubmit={onSubmit}>
+        <h2>Create a post:</h2>
+        <Form.Field>
+          <Form.Input
+            placeholder="Hi World!"
+            name="body"
+            onChange={onChange}
+            value={values.body}
+            error={error ? true : false}
+          />
+        </Form.Field>
+        <Button type="submit" color="teal">
+          Submit
+        </Button>
+      </Form>
+      {error && <div className="ui error message" style={{marginBottom: 20}}>
+          <ul className="list">
+              <li>{error.graphQLErrors[0].message}</li>
+          </ul>
+      </div>}
+    </>
   );
 }
 
