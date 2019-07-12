@@ -4,7 +4,7 @@ import { useMutation } from "@apollo/react-hooks";
 import gql from "graphql-tag";
 import { Icon, Label, Button } from "semantic-ui-react";
 
-function LikeButton({ post: { id, likeCount, likes } }, user) {
+function LikeButton({ user, post: { id, likeCount, likes } }) {
   const [liked, setLiked] = useState(false);
   useEffect(() => {
     if (user && likes.find(like => like.username === user.username)) {
@@ -12,7 +12,7 @@ function LikeButton({ post: { id, likeCount, likes } }, user) {
     } else setLiked(false);
   }, [user, likes]);
 
-  const [likePost] = useMutation(LIKE_POST_MUTATION, {
+  const [likePost] = useMutation(LIKE_POST, {
     variables: { postId: id }
   });
 
@@ -41,11 +41,11 @@ function LikeButton({ post: { id, likeCount, likes } }, user) {
     </Button>
   );
 }
-const LIKE_POST_MUTATION = gql`
-    mutation likePost($postId: ID!){
-        likePost(postId){
+const LIKE_POST = gql`
+    mutation likePost($postId: String!){
+        likePost(postId: $postId){
             id
-            likes{
+            likes {
                 id username
             }
             likeCount
