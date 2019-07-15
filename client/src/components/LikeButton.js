@@ -12,7 +12,7 @@ function LikeButton({ user, post: { id, likeCount, likes } }) {
     } else setLiked(false);
   }, [user, likes]);
 
-  const [likePost] = useMutation(LIKE_POST, {
+  const [likePost] = useMutation(LIKE_POST_MUTATION, {
     variables: { postId: id }
   });
 
@@ -41,7 +41,7 @@ function LikeButton({ user, post: { id, likeCount, likes } }) {
     </Button>
   );
 }
-const LIKE_POST = gql`
+const LIKE_POST_MUTATION = gql`
     mutation likePost($postId: String!){
         likePost(postId: $postId){
             id
