@@ -16,7 +16,7 @@ const server = new ApolloServer({
 
 const port = process.env.PORT || 5000;
 mongoose
-  .connect(process.env.MONGODB_COBALT_URI, { useNewUrlParser: true })
+  .connect(process.env.MONGOLAB_COBALT_URI, { useNewUrlParser: true })
   .then(() => {
     console.log("MongoDB Connected");
     return server.listen({ port: port });
