@@ -1,3 +1,4 @@
+require('dotenv').config();
 const { ApolloServer, PubSub } = require("apollo-server");
 const mongoose = require("mongoose");
 
@@ -14,7 +15,7 @@ const server = new ApolloServer({
 });
 
 mongoose
-  .connect(MONGODB, { useNewUrlParser: true })
+  .connect(process.env.MONGODB_URI, { useNewUrlParser: true })
   .then(() => {
     console.log("MongoDB Connected");
     return server.listen({ port: 5000 });
