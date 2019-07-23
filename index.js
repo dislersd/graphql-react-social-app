@@ -1,4 +1,4 @@
-require('dotenv').config();
+require("dotenv").config();
 const { ApolloServer, PubSub } = require("apollo-server");
 const mongoose = require("mongoose");
 
