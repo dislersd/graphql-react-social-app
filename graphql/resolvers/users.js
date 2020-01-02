@@ -8,7 +8,7 @@ const {
   validateLoginInput
 } = require("../../util/validators");
 
-function genetateToken(user) {
+function generateToken(user) {
   return jwt.sign(
     {
       id: user.id,
@@ -52,9 +52,7 @@ module.exports = {
     },
     async register(
       _,
-      {
-        registerInput: { username, email, password, confirmPassword }
-      }
+      { registerInput: { username, email, password, confirmPassword } }
     ) {
       const { valid, errors } = validateRegisterInput(
         username,
@@ -84,7 +82,7 @@ module.exports = {
 
       const res = await newUser.save();
 
-      const token = genetateToken(res);
+      const token = generateToken(res);
 
       return {
         ...res._doc,
